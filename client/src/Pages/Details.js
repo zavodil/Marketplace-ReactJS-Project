@@ -13,13 +13,25 @@ function Details({ match, history }) {
     let productId = match.params.id;
     let [product, setProduct] = useState([])
     let [loading, setLoading] = useState(true);
+
+
+    async function getProposal(id) {
+        const proposal = await window._near.contract.get_proposal({
+            proposal_id: id
+        });
+        proposal.publish_date = new Intl.DateTimeFormat('default', { dateStyle: 'full', timeStyle: 'long' }).format(new Date(Number(proposal.published_time)/ 1000000));
+        proposal.proposal_id = id;
+        return proposal;
+    }
+
+
    
     useEffect(() => {
-        getSpecific(productId)
+        getProposal(productId)
             .then(res => setProduct(res), setLoading(false))
             .catch(err => console.log(err))
     }, [productId, setProduct, setLoading])
-   console.log(productId)
+
     return (
         <>
             <SimpleSider />

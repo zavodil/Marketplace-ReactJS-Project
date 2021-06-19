@@ -1,21 +1,24 @@
-import { Card } from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
 // import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-function ProductCard({ params }) {
+function ProductCard({params}) {
+    console.log(params)
     return (
         <Card>
-            <Link to={`/categories/${params.category}/${params._id}/details`}>
-                <Card.Img variant="top" src={params.image} />
+            <Link to={`/proposals/${params.proposal_id}/details`}>
+                {/* <Card.Img variant="top" src={params.image} /> */}
                 <Card.Body>
-                    <Card.Title>{params.title}</Card.Title>
-                    <Card.Text>{params.price}€</Card.Text>
+                    <Card.Title>{params.proposal_id}</Card.Title>
+                    <Card.Text>{params.price} Ⓝ</Card.Text>
                 </Card.Body>
             </Link>
             <Card.Footer>
                 <small className="text-muted">
-                    {params.addedAt} -  <strong>{params.city}</strong>
-                    {/* <Link to="" id="heartIcon"><BsHeart /></Link> */}
+                    <div>{params.description}</div>
+                    {/* {params.addedAt} - <strong>{params.city}</strong>
+                    {<Link to="" id="heartIcon"><BsHeart /></Link>}
+                    */}
                 </small>
             </Card.Footer>
         </Card>

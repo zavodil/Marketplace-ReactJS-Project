@@ -49,7 +49,6 @@
 
 .navbar-brand a {
     font-family: serif;
-    font-style: italic;
     font-size: 20pt;
 }
 
@@ -63,4 +62,10 @@
     object-fit: cover;
     border-radius: 100px;
     border: 1px solid black;
+}
+
+.add-offer-button{
+    padding: 0 3px;
+    margin-right: 10px;
+    border: 1px solid #343a40;
 }

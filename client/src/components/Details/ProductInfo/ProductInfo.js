@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Row, Tabs, Tab, Image, OverlayTrigger , Tooltip} from 'react-bootstrap';
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import { wishProduct } from '../../../services/productData'
+import {useState, useEffect} from 'react';
+import {Row, Tabs, Tab, Image, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {BsHeart, BsHeartFill} from 'react-icons/bs';
+import {wishProduct} from '../../../services/productData'
 
-function ProductInfo({ params }) {
+function ProductInfo({params}) {
     const [wish, setWish] = useState(false);
 
     useEffect(() => {
@@ -28,21 +28,33 @@ function ProductInfo({ params }) {
         }
     }
 
+
+
     return (
         <>
-            <Image className="col-lg-12" src={params.image} rounded />
+            {/* <Image className="col-lg-12" src={params.image} rounded /> */}
             <Row>
-                <h1 className="col-lg-10 col-sm-10 product-info-heading">{params.title}</h1>
+                <div className="product-info-heading col-lg-10 col-sm-10">
+                    <h3>
+                        Account for sale: {params.proposal_id}
+                    </h3>
+
+                    {params.new_owner ?
+                        <span>
+                        New owner: {params.new_owner}
+                    </span> : null
+                    }
+                </div>
                 <span id="heartIconDetails" className="col-lg-1 col-sm-1" onClick={onHearthClick}>
                 {params.isAuth && <>
                     {!wish ? (
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Add to Wishlist</Tooltip>}>
-                            <BsHeart />
-                        </OverlayTrigger>
-                    )
+                            <OverlayTrigger placement="top" overlay={<Tooltip>Add to Wishlist</Tooltip>}>
+                                <BsHeart/>
+                            </OverlayTrigger>
+                        )
                         : (
                             <OverlayTrigger placement="top" overlay={<Tooltip>Remove from Wishlist</Tooltip>}>
-                                <BsHeartFill />
+                                <BsHeartFill/>
                             </OverlayTrigger>
                         )
                     }
@@ -53,9 +65,14 @@ function ProductInfo({ params }) {
             <div id="detailsCardText" className="col-lg-12">
                 <Tabs defaultActiveKey="details" transition={false}>
                     <Tab eventKey="details" title="Details" id="tab-details">
-                        {params.description}
-                        <hr />
-                        <p id="details-footer" className="text-muted">Product listed at {params.addedAt}</p>
+
+                        <p><strong>Proposal owner: </strong>{params.proposal_owner}</p>
+
+                        {params.description ? <p><strong>Description: </strong>{params.description}</p> : null}
+                        <p>Expired: {params.is_expired ? "True" : "False"}</p>
+                        <p>Deposit Received: {params.is_deposit_received ? "True" : "False"}</p>
+                        <hr/>
+                        <p id="details-footer" className="text-muted">Proposal listed at {params.publish_date}</p>
                     </Tab>
                     {/* <Tab eventKey="aboutSeller" title="About seller">
                         <p>Name: {params.name || "Not specified"}</p>

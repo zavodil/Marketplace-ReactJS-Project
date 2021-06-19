@@ -1,11 +1,10 @@
 const baseUrl = 'http://localhost:5000';
 
 export async function getAll(category) {
-    if (category && category !== 'all') {
-        return (await fetch(`${baseUrl}/products/${category}`, { credentials: 'include' })).json();
-    } else {
-        return (await fetch(`${baseUrl}/products`, { credentials: 'include' })).json();
-    }
+    return await window._near.contract.get_proposals({
+        from_index: 0,
+        limit: 100
+    });
 }
 
 export async function getSpecific(id) {

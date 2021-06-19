@@ -5,18 +5,25 @@ import { ContextStore } from './ContextStore';
 
 import './index.css';
 import App from './App';
+import { initContract } from './utils'
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-   <React.StrictMode>
-      <ContextStore>
-         <BrowserRouter>
-            <App />
-         </BrowserRouter>
-      </ContextStore>
-   </React.StrictMode>,
-   document.getElementById('root')
-);
+window.nearInitPromise = initContract()
+    .then(() => {
+        ReactDOM.render(
+            <React.StrictMode>
+                <ContextStore>
+                    <BrowserRouter>
+                        <App />
+                    </BrowserRouter>
+                </ContextStore>
+            </React.StrictMode>,
+            document.getElementById('root')
+        );
+    })
+    .catch(console.error)
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
